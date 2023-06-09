@@ -8,6 +8,8 @@ export const teamMemberAddedProject = createTrigger({
     description: 'Triggers when a new member is added to a row',
     props: {
         api_key: promaProps.api_key,
+        workspace_id: promaProps.workspace_id(true),
+        table_id: promaProps.table_id(true),
     },
     type: TriggerStrategy.WEBHOOK,
     sampleData:
@@ -38,8 +40,7 @@ export const teamMemberAddedProject = createTrigger({
         const resp = await storeWebhookUrl({
             api_key,
             trigger_type: 'teamMemberAddedToProject',
-            // organization_id: context.propsValue.organization_id || '',
-            table_id: '',
+            table_id: context.propsValue.table_id,
             webhook_url: context.webhookUrl,
         });
         await context.store?.put<{ ROWID: string }>('_new_team_member_project_trigger', {

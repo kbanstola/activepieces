@@ -97,11 +97,13 @@ export async function getTableColumns(
 export async function storeWebhookUrl({
   api_key,
   table_id,
+  workspace_id,
   webhook_url,
   trigger_type,
 }: {
   api_key: string;
-  table_id: string;
+  table_id?: string;
+  workspace_id?: string;
   webhook_url: string;
   trigger_type: string;
 }): Promise<Webhook> {
@@ -171,7 +173,7 @@ export async function updateTableRow({
   workspace_id: string;
   data: any;
 }): Promise<TableRow | null> {
-  if(!data?.ROWID) return null;
+  if (!data?.ROWID) return null;
   const response = await httpClient.sendRequest<{ data: TableRow }>({
     url: `${PROMA_SERVER_URL}/tablerow/update`,
     method: HttpMethod.POST,

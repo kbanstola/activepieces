@@ -16,7 +16,6 @@ export const addPromaTable = createAction({
   },
   async run(context) {
     const api_key = context.propsValue.api_key;
-    // const organization_id = context.propsValue.organization_id;
     const workspace_id = context.propsValue.workspace_id;
     const name = context.propsValue.table_name;
     const description = context.propsValue.table_description;
